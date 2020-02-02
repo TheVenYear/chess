@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="Figures\Bishop.cs" />
     <Compile Include="Figures\Castle.cs" />
     <Compile Include="FigureType.cs" />
     <Compile Include="IFigure.cs" />
