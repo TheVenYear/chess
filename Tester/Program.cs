@@ -18,21 +18,22 @@ namespace Tester
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    cells.Add(new Cell(i, j));
+                    cells.Add(new Cell(j, i));
                 }
             }
 
             var huy = new Bishop();
 
-            huy.currentCell = cells[3];
+            huy.currentCell = cells[28];
 
             var huyuy = huy.GetMoves(cells).ToList();
 
             foreach (var item in huyuy)
             {
-                Console.WriteLine($"{item.X}, {item.Y}");
+                Console.WriteLine($"{item.Y}, {item.X}");
             }
 
+            Console.ReadKey();
         }
     }
 }
