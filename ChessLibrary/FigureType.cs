@@ -8,8 +8,10 @@ namespace ChessLibrary
 {
     public enum FigureType
     {
+        None = 0,
         Castle = 1,
         Queen = 2,
-        Bishop = 3
+        Bishop = 3,
+        Pawn = 4,
     }
 }

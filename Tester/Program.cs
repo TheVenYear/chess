@@ -22,7 +22,7 @@ namespace Tester
                 }
             }
 
-            var huy = new Bishop();
+            var huy = new Queen();
 
             huy.currentCell = cells[28];
 
