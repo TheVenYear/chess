@@ -16,11 +16,7 @@ namespace ChessLibrary.Figures
 
         public IEnumerable<Cell> GetMoves(IEnumerable<Cell> field)
         {
-            foreach (var cell in field)
-            {
-                if (cell.X == currentCell.X || cell.Y == currentCell.Y)
-                    yield return cell;
-            }
+            return figure.GetMoves(field, currentCell);
         }
     }
 }

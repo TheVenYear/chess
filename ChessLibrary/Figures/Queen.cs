@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ChessLibrary.Figures
 {
@@ -16,11 +17,8 @@ namespace ChessLibrary.Figures
 
         public IEnumerable<Cell> GetMoves(IEnumerable<Cell> field)
         {
-            var castle = new Castle();
-            castle.currentCell = currentCell;
-            var bishop = new Bishop();
-            bishop.currentCell = currentCell;
-            return castle.GetMoves(field).Union(bishop.GetMoves(field));
+            return FigureType.Bishop.GetMoves(field, currentCell).Union(FigureType.Castle.GetMoves(field, currentCell));
         }
     }
+
 }

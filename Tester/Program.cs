@@ -24,7 +24,7 @@ namespace Tester
 
             var huy = new Queen();
 
-            huy.currentCell = cells[28];
+            huy.currentCell = cells[0];
 
             var huyuy = huy.GetMoves(cells).ToList();
 
