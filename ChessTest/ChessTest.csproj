@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{364E0695-8955-46EB-B809-777C3A9583B8}</ProjectGuid>
+    <ProjectGuid>{0FF4C88C-026A-4621-BD15-73AB07DE63EF}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Tester</RootNamespace>
-    <AssemblyName>Tester</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>ChessTest</RootNamespace>
+    <AssemblyName>ChessTest</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,9 +54,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChessLibrary\ChessLibrary.csproj">
-      <Project>{15a26c98-affc-4c7e-9c2b-448ad4c7186f}</Project>
-      <Name>ChessLibrary</Name>
+    <ProjectReference Include="..\ChessLib\ChessLib.csproj">
+      <Project>{7a25abd2-55e5-49d3-ae0a-072a3618edfd}</Project>
+      <Name>ChessLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("ChessLibrary")]
+[assembly: AssemblyTitle("ChessLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ChessLibrary")]
+[assembly: AssemblyProduct("ChessLib")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("15a26c98-affc-4c7e-9c2b-448ad4c7186f")]
+[assembly: Guid("7a25abd2-55e5-49d3-ae0a-072a3618edfd")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
