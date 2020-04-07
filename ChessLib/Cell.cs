@@ -8,32 +8,49 @@ namespace ChessLib
 {
     public class Cell
     {
-        public Cell(int y, int x)
+        public Cell(PlayGround playGround, int posY, int posX)
         {
-            this.Y = y;
-            this.X = x;
+            PosX = posX;
+            PosY = posY;
+            PlayGround = playGround;
         }
 
-        public int X { get; set; }
+        public PlayGround PlayGround { get; private set; }
 
-        public int Y { get; set; }
+        public IFigure Figure { get; set; } = new None();
 
-        private IFigure currentFigure;
+        public int PosX { get; private set; }
 
-        public IFigure CurrentFigure
+        public int PosY { get; private set; }
+
+        public IEnumerable<Cell> GetLine(int stepY, int stepX)
         {
-            get
-            {
-                return currentFigure;
-            }
+            var status = true;
+            int counterY = PosY + stepY, counterX = PosX + stepX;
 
-            set
+            while (status)
             {
-                if (currentFigure != null)
-                    currentFigure.CurrentCell = null;
-                currentFigure = value;
-                currentFigure.CurrentCell = this;
+                if (PlayGround[counterY, counterX] == null || PlayGround[counterY, counterX].Figure.Colour == Figure.Colour)
+                {
+                    status = false;
+                    continue;
+                }
+                if (PlayGround[counterY, counterX].Figure.Colour != Colour.None && PlayGround[counterY, counterX].Figure.Colour != Figure.Colour)
+                {
+                    yield return PlayGround[counterY, counterX];
+                    status = false;
+                    continue;
+                }
+
+                yield return PlayGround[counterY, counterX];
+                counterY += stepY;
+                counterX += stepX;
             }
+        }
+
+        public IEnumerable<Cell> GetMoves()
+        {
+            return Figure.Type.GetMoves(this);
         }
     }
 }

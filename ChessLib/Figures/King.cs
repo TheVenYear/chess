@@ -8,13 +8,9 @@ namespace ChessLib
 {
     public class King : IFigure
     {
-        public bool IsBlack { get; set; }
+        public FigureType Type { get; } = FigureType.King;
 
-        public Cell CurrentCell { get; set; }
-
-        public IEnumerable<Cell> GetMoves(CellField field)
-        {
-            return FigureType.King.GetMoves(field, CurrentCell);
-        }
+        public Colour Colour { get; set; } = Colour.White;
+        public bool IsFirstStep { get; set; } = true;
     }
 }

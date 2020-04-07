@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0FF4C88C-026A-4621-BD15-73AB07DE63EF}</ProjectGuid>
+    <ProjectGuid>{C8769483-E667-48EC-A4CA-F554A6268712}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ChessTest</RootNamespace>
     <AssemblyName>ChessTest</AssemblyName>
@@ -32,10 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChessLib\ChessLib.csproj">
-      <Project>{7a25abd2-55e5-49d3-ae0a-072a3618edfd}</Project>
+      <Project>{50f9cea9-3250-49ff-ac67-91d82a221698}</Project>
       <Name>ChessLib</Name>
     </ProjectReference>
   </ItemGroup>

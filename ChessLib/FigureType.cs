@@ -8,54 +8,98 @@ namespace ChessLib
 {
     public enum FigureType
     {
-        None,
-        Castle,
-        Queen,
-        Bishop,
-        Pawn,
-        King
+        Castle, Bishop, Knight,
+        King, Queen, Pawn,
+        None
     }
 
-    public static class FigureTypeExtension
+    public static class ChessExtensions
     {
-        public static IEnumerable<Cell> GetMoves(this FigureType currentType, CellField field, Cell currentCell)
+        public static void AddCell(this List<Cell> list, Cell currentCell, int stepY, int stepX)
         {
-            switch (currentType)
+            if (currentCell.PlayGround[currentCell.PosY + stepY, currentCell.PosX + stepX] != null && 
+                currentCell.PlayGround[currentCell.PosY + stepY, currentCell.PosX + stepX].Figure.Colour != currentCell.Figure.Colour)
+            {
+                list.Add(currentCell.PlayGround[currentCell.PosY + stepY, currentCell.PosX + stepX]);
+            }
+        }
+
+        public static IEnumerable<Cell> GetMoves(this FigureType figure, Cell currentCell)
+        {
+            var result = new List<Cell>();
+
+            switch (figure)
             {
                 case FigureType.Castle:
-                    foreach (var cell in field.Where(cell => cell.X == currentCell.X || cell.Y == currentCell.Y))
-                    {
-                        yield return cell;
-                    }
+                    result.AddRange(currentCell.GetLine(0, -1));
+                    result.AddRange(currentCell.GetLine(-1, 0));
+                    result.AddRange(currentCell.GetLine(0, 1));
+                    result.AddRange(currentCell.GetLine(1, 0));
                     break;
-
                 case FigureType.Bishop:
-                    var counter = 0;
-
-                    while (field.ExcistsAt(currentCell.Y + counter, currentCell.X + counter) &&
-                            field.ExcistsAt(currentCell.Y - counter, currentCell.X - counter) &&
-                            field.ExcistsAt(currentCell.Y - counter, currentCell.X + counter) &&
-                            field.ExcistsAt(currentCell.Y + counter, currentCell.X - counter))
-                    {
-                        yield return field[currentCell.Y + counter, currentCell.X + counter];
-                        yield return field[currentCell.Y - counter, currentCell.X - counter];
-                        yield return field[currentCell.Y - counter, currentCell.X + counter];
-                        yield return field[currentCell.Y + counter, currentCell.X - counter];
-                        counter++;
-                    }
-
+                    result.AddRange(currentCell.GetLine(-1, -1));
+                    result.AddRange(currentCell.GetLine(1, 1));
+                    result.AddRange(currentCell.GetLine(1, -1));
+                    result.AddRange(currentCell.GetLine(-1, 1));
                     break;
-
+                case FigureType.Knight:
+                    result.AddCell(currentCell, 2, 1);
+                    result.AddCell(currentCell, 2, -1);
+                    result.AddCell(currentCell, -2, 1);
+                    result.AddCell(currentCell, -2, -1);
+                    result.AddCell(currentCell, 1, 2);
+                    result.AddCell(currentCell, -1, 2);
+                    result.AddCell(currentCell, 1, -2);
+                    result.AddCell(currentCell, -1, -2);
+                    break;
                 case FigureType.King:
-                    for (int i = currentCell.Y - 1; i <= currentCell.Y + 1; i++)
+                    result.AddCell(currentCell, -1, 0);
+                    result.AddCell(currentCell, 1, 0);
+                    result.AddCell(currentCell, 0, 1);
+                    result.AddCell(currentCell, 0, -1);
+                    break;
+                case FigureType.Queen:
+                    result.AddRange(FigureType.Bishop.GetMoves(currentCell));
+                    result.AddRange(FigureType.Castle.GetMoves(currentCell));
+                    break;
+                case FigureType.Pawn:
+                    if (currentCell.Figure.Colour == Colour.White)
                     {
-                        for (int j = currentCell.X - 1; j <= currentCell.X + 1; j++)
+                        result.AddCell(currentCell, -1, 0);
+                        var cell = currentCell.PlayGround[currentCell.PosY - 1, currentCell.PosX - 1];
+                        if (cell != null && cell.Figure.Colour != currentCell.Figure.Colour && cell.Figure.Colour != Colour.None)
                         {
-                            yield return field[i, j];
+                            result.AddCell(currentCell, -1, -1);
+                        }
+
+                        cell = currentCell.PlayGround[currentCell.PosY - 1, currentCell.PosX + 1];
+                        if (cell != null &&  cell.Figure.Colour != currentCell.Figure.Colour && cell.Figure.Colour != Colour.None)
+                        {
+                            result.AddCell(currentCell, -1, 1);
                         }
                     }
+                    else
+                    {
+                        result.AddCell(currentCell, 1, 0);
+                        var cell = currentCell.PlayGround[currentCell.PosY + 1, currentCell.PosX + 1];
+                        if (cell != null &&  cell.Figure.Colour != currentCell.Figure.Colour && cell.Figure.Colour != Colour.None)
+                        {
+                            result.AddCell(currentCell, 1, 1);
+                        }
+
+                        cell = currentCell.PlayGround[currentCell.PosY + 1, currentCell.PosX - 1];
+                        if (cell != null &&  cell.Figure.Colour != currentCell.Figure.Colour && cell.Figure.Colour != Colour.None)
+                        {
+                            result.AddCell(currentCell, 1, -1);
+                        }
+                    }
+
+                    break;
+                case FigureType.None:
                     break;
             }
+
+            return result;
         }
     }
 }

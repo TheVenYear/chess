@@ -8,10 +8,10 @@ namespace ChessLib
 {
     public interface IFigure
     {
-        bool IsBlack { get; set; }
+        FigureType Type { get; }
 
-        Cell CurrentCell { get; set; }
+        Colour Colour { get; set; }
 
-        IEnumerable<Cell> GetMoves(CellField field);
+        bool IsFirstStep { get; set; }
     }
 }

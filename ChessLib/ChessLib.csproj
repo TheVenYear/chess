@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7A25ABD2-55E5-49D3-AE0A-072A3618EDFD}</ProjectGuid>
+    <ProjectGuid>{50F9CEA9-3250-49FF-AC67-91D82A221698}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChessLib</RootNamespace>
@@ -42,16 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
-    <Compile Include="CellField.cs" />
+    <Compile Include="Colour.cs" />
     <Compile Include="Figures\Bishop.cs" />
     <Compile Include="Figures\Castle.cs" />
     <Compile Include="Figures\King.cs" />
+    <Compile Include="Figures\Knight.cs" />
+    <Compile Include="Figures\None.cs" />
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Figures\Queen.cs" />
     <Compile Include="FigureType.cs" />
-    <Compile Include="IFigure.cs" />
+    <Compile Include="Figures\IFigure.cs" />
+    <Compile Include="PlayGround.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

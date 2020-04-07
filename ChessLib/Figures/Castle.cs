@@ -8,13 +8,10 @@ namespace ChessLib
 {
     public class Castle : IFigure
     {
-        public bool IsBlack { get; set; }
+        public FigureType Type { get; } = FigureType.Castle;
 
-        public Cell CurrentCell { get; set; }
+        public Colour Colour { get; set; } = Colour.White;
 
-        public IEnumerable<Cell> GetMoves(CellField field)
-        {
-            return FigureType.Castle.GetMoves(field, CurrentCell);
-        }
+        public bool IsFirstStep { get; set; } = true;
     }
 }

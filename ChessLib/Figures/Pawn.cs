@@ -8,13 +8,10 @@ namespace ChessLib
 {
     public class Pawn : IFigure
     {
-        public Cell CurrentCell { get; set; }
+        public FigureType Type { get; } = FigureType.Pawn;
 
-        public bool IsBlack { get; set; }
+        public Colour Colour { get; set; } = Colour.White;
 
-        public IEnumerable<Cell> GetMoves(CellField field)
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsFirstStep { get; set; } = true;
     }
 }

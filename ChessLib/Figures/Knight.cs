@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChessLib
 {
-    public class Bishop : IFigure
+    public class Knight : IFigure
     {
-        public FigureType Type { get; } = FigureType.Bishop;
+        public FigureType Type { get; } = FigureType.Knight;
 
         public Colour Colour { get; set; } = Colour.White;
 
