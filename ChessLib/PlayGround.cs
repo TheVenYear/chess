@@ -11,9 +11,25 @@ namespace ChessLib
     {
         Cell[,] cells;
 
+        public Colour CurrentPlayer { get; private set; } = Colour.White;
+
         public int VerSize { get; set; }
 
         public int HorSize { get; set; }
+
+        public bool Move(Cell from, Cell to)
+        {
+            if (!from.GetMoves().Contains(to) || CurrentPlayer != from.Figure.Colour)
+            {
+                return false;
+            }
+
+            to.Figure = from.Figure;
+            from.Figure = new None();
+            CurrentPlayer = CurrentPlayer.TakeOpposite();
+
+            return true;
+        }
 
         public PlayGround(int verSize = 8, int horSize = 8)
         {
@@ -30,7 +46,32 @@ namespace ChessLib
             }
 
             cells[0, 0].Figure = new Castle() { Colour = Colour.Black };
-            cells[1, 0].Figure = new Pawn() { Colour = Colour.White };
+            cells[0, 1].Figure = new Knight() { Colour = Colour.Black };
+            cells[0, 2].Figure = new Bishop() { Colour = Colour.Black };
+            cells[0, 3].Figure = new Queen() { Colour = Colour.Black };
+            cells[0, 4].Figure = new King() { Colour = Colour.Black };
+            cells[0, 5].Figure = new Bishop() { Colour = Colour.Black };
+            cells[0, 6].Figure = new Knight() { Colour = Colour.Black };
+            cells[0, 7].Figure = new Castle() { Colour = Colour.Black };
+
+            for (int i = 0; i < VerSize; i++)
+            {
+                cells[1, i].Figure = new Pawn() { Colour = Colour.Black };
+            }
+
+            for (int i = 0; i < VerSize; i++)
+            {
+                cells[6, i].Figure = new Pawn() { Colour = Colour.White };
+            }
+
+            cells[7, 0].Figure = new Castle() { Colour = Colour.White };
+            cells[7, 1].Figure = new Knight() { Colour = Colour.White };
+            cells[7, 2].Figure = new Bishop() { Colour = Colour.White };
+            cells[7, 3].Figure = new Queen() { Colour = Colour.White };
+            cells[7, 4].Figure = new King() { Colour = Colour.White };
+            cells[7, 5].Figure = new Bishop() { Colour = Colour.White };
+            cells[7, 6].Figure = new Knight() { Colour = Colour.White };
+            cells[7, 7].Figure = new Castle() { Colour = Colour.White };
         }
 
         public Cell this[int y, int x]

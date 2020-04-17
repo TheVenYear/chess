@@ -12,16 +12,59 @@ namespace ChessTest
         static void Main(string[] args)
         {
             var pg = new PlayGround();
-            var list = pg[1, 0].GetMoves();
+
+            while (true)
+            {
+                renderPg(pg);
+                try
+                {
+                    Console.Write("Выберете фигуру(в виде \"n,n\"): ");
+                    var posFrom = Console.ReadLine().Split(',').Select(item => int.Parse(item) - 1).ToArray();
+                    if (posFrom.Length > 2)
+                    {
+                        throw new FormatException("Позиция состоит из 2х чисел!");
+                    }
+
+                    Console.Write("Выберете позицию, куда переместить(в виде \"n,n\"): ");
+                    var posTo = Console.ReadLine().Split(',').Select(item => int.Parse(item) - 1).ToArray();
+                    if (posTo.Length > 2)
+                    {
+                        throw new FormatException("Позиция состоит из 2х чисел!");
+                    }
+
+                    pg.Move(pg[posFrom[0], posFrom[1]], pg[posTo[0], posTo[1]]);
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadKey();
+                }
+            }
+
+        }
+
+        static void renderPg(PlayGround pg)
+        {
+            Console.Clear();
+            Console.Write("Ходят ");
+            switch (pg.CurrentPlayer)
+            {
+                case Colour.White:
+                    Console.WriteLine("белые");
+                    break;
+                case Colour.Black:
+                    Console.WriteLine("чёрные");
+                    break;
+            }
             Console.BackgroundColor = ConsoleColor.Red;
             for (int i = 0; i < pg.VerSize; i++)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write(i);
+                Console.BackgroundColor = ConsoleColor.Red;
                 for (int j = 0; j < pg.HorSize; j++)
                 {
-                    if (list.Contains(pg[i, j]))   
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                    }
                     switch (pg[i, j].Figure.Colour)
                     {
                         case Colour.White:
@@ -62,10 +105,8 @@ namespace ChessTest
                     Console.BackgroundColor = ConsoleColor.Red;
                 }
                 Console.WriteLine();
-
             }
-
-            Console.ReadKey();
+            Console.BackgroundColor = ConsoleColor.Black;
         }
     }
 }
