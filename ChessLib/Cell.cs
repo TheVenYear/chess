@@ -48,6 +48,20 @@ namespace ChessLib
             }
         }
 
+        public Cell GetCell(int stepY, int stepX)
+        {
+            if (PlayGround[PosY + stepY, PosX + stepX] != null && PlayGround[PosY + stepY, PosX + stepX].Figure.Colour != Figure.Colour)
+            {
+                return PlayGround[PosY + stepY, PosX + stepX];
+            }
+
+            else
+            {
+                return null;
+            }
+
+        }
+
         public IEnumerable<Cell> GetMoves()
         {
             return Figure.Type.GetMoves(this);

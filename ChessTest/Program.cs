@@ -57,14 +57,28 @@ namespace ChessTest
                     break;
             }
             Console.BackgroundColor = ConsoleColor.Red;
-            for (int i = 0; i < pg.VerSize; i++)
+            for (int i = -1; i < pg.VerSize; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.BackgroundColor = ConsoleColor.Black;
-                Console.Write(i);
+                if (i != -1)
+                {
+                    Console.Write($"{i + 1} ");
+                }
+                else if (i == -1)
+                {
+                    Console.Write("  ");
+                }
+
                 Console.BackgroundColor = ConsoleColor.Red;
                 for (int j = 0; j < pg.HorSize; j++)
                 {
+                    if (i == -1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(j + 1);
+                        continue;
+                    }
                     switch (pg[i, j].Figure.Colour)
                     {
                         case Colour.White:

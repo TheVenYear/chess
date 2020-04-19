@@ -24,10 +24,10 @@ namespace ChessLib
                 return false;
             }
 
+            from.Figure.IsFirstStep = false;
             to.Figure = from.Figure;
             from.Figure = new None();
             CurrentPlayer = CurrentPlayer.TakeOpposite();
-
             return true;
         }
 

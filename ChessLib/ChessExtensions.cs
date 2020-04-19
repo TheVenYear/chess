@@ -10,10 +10,9 @@ namespace ChessLib
     {
         public static void AddCell(this List<Cell> list, Cell currentCell, int stepY, int stepX)
         {
-            if (currentCell.PlayGround[currentCell.PosY + stepY, currentCell.PosX + stepX] != null &&
-                currentCell.PlayGround[currentCell.PosY + stepY, currentCell.PosX + stepX].Figure.Colour != currentCell.Figure.Colour)
+            if (currentCell.GetCell(stepY, stepX) != null)
             {
-                list.Add(currentCell.PlayGround[currentCell.PosY + stepY, currentCell.PosX + stepX]);
+                list.Add(currentCell.GetCell(stepY, stepX));
             }
         }
 
@@ -71,8 +70,11 @@ namespace ChessLib
                 case FigureType.Pawn:
                     if (currentCell.Figure.Colour == Colour.White)
                     {
-                        result.AddCell(currentCell, -1, 0);
-                        if (currentCell.Figure.IsFirstStep)
+                        if (currentCell.GetCell(-1, 0) != null && currentCell.GetCell(-1, 0).Figure.Type == FigureType.None)
+                        {
+                            result.AddCell(currentCell, -1, 0);
+                        }
+                        if (currentCell.Figure.IsFirstStep && result.Contains(currentCell.GetCell(-1, 0)))
                         {
                             result.AddCell(currentCell, -2, 0);
                         }
@@ -90,8 +92,12 @@ namespace ChessLib
                     }
                     else
                     {
-                        result.AddCell(currentCell, 1, 0);
-                        if (currentCell.Figure.IsFirstStep)
+                        if (currentCell.GetCell(1, 0) != null && currentCell.GetCell(1, 0).Figure.Type == FigureType.None)
+                        {
+                            result.AddCell(currentCell, 1, 0);
+                        }
+
+                        if (currentCell.Figure.IsFirstStep && result.Contains(currentCell.GetCell(1, 0)))
                         {
                             result.AddCell(currentCell, 2, 0);
                         }
