@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ChessLib;
 
 namespace ChessTest
@@ -12,6 +13,7 @@ namespace ChessTest
         static void Main(string[] args)
         {
             var pg = new PlayGround();
+            pg.ThrowWin += Pg_ThrowWin;
 
             while (true)
             {
@@ -41,6 +43,21 @@ namespace ChessTest
                 }
             }
 
+        }
+
+        private static void Pg_ThrowWin(Colour obj)
+        {
+            switch (obj)
+            {
+                case Colour.White:
+                    MessageBox.Show("Победили белые");
+                    break;
+                case Colour.Black:
+                    MessageBox.Show("Победили чёрные");
+                    break;
+                case Colour.None:
+                    break;
+            }
         }
 
         static void renderPg(PlayGround pg)

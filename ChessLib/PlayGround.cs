@@ -13,6 +13,8 @@ namespace ChessLib
 
         public Colour CurrentPlayer { get; private set; } = Colour.White;
 
+        public event Action<Colour> ThrowWin;
+
         public int VerSize { get; set; }
 
         public int HorSize { get; set; }
@@ -28,10 +30,26 @@ namespace ChessLib
             to.Figure = from.Figure;
             from.Figure = new None();
             CurrentPlayer = CurrentPlayer.TakeOpposite();
+            WinCheck();
             return true;
         }
 
-        public PlayGround(int verSize = 8, int horSize = 8)
+        public void WinCheck()
+        {
+            var kings = this.Where(item => item.Figure.Type == FigureType.King);
+            if (!(kings.Contains(FigureType.King) && kings.Where(cell => cell.Figure.Colour == Colour.White).Any()))
+            {
+                ThrowWin?.Invoke(Colour.Black);
+                BuildGround(VerSize, HorSize);
+            }
+
+            else if (!(kings.Contains(FigureType.King) && kings.Where(cell => cell.Figure.Colour == Colour.Black).Any()))
+            {
+                ThrowWin?.Invoke(Colour.White);
+            }
+        }
+
+        private void BuildGround(int verSize, int horSize)
         {
             VerSize = verSize;
             HorSize = horSize;
@@ -72,6 +90,11 @@ namespace ChessLib
             cells[7, 5].Figure = new Bishop() { Colour = Colour.White };
             cells[7, 6].Figure = new Knight() { Colour = Colour.White };
             cells[7, 7].Figure = new Castle() { Colour = Colour.White };
+        }
+
+        public PlayGround(int verSize = 8, int horSize = 8)
+        {
+            BuildGround(verSize, horSize);
         }
 
         public Cell this[int y, int x]

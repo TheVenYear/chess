@@ -16,6 +16,19 @@ namespace ChessLib
             }
         }
 
+        public static bool Contains(this IEnumerable<Cell> pgEnum, FigureType type)
+        {
+            foreach (var cell in pgEnum)
+            {
+                if (cell.Figure.Type == type)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static Colour TakeOpposite(this Colour colour)
         {
             if (colour == Colour.White)
